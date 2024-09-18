@@ -3,6 +3,7 @@ const router = require("./src/route/api");
 const app = new express();
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
+
 //=====security measures=====//
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
@@ -30,7 +31,6 @@ let options = { user: "", pass: "", autoIndex: true };
 mongoose.connect(uri, options)
     .then(() => console.log('Mongo DB Connected Successfully!'));
 
-
 //======Api Routes=====// 
 app.use('/api/',router);
 
@@ -39,9 +39,6 @@ app.use(express.static('client-site/dist'));
 app.get("*",(req,res)=>{
 res.sendFile(path.resolve(__dirname,'client-site','dist','index.html'));
 })
-
-
-
 
 //===undefined routes===//
 app.use('*', (req, res) => {
